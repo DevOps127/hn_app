@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hn_app/src/articles.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,29 +21,59 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<Article> _articles = articles;
+
+  Widget _buildItem(Article article) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: ExpansionTile(
+        title: Text(
+          article.text,
+          style: TextStyle(
+            fontSize: 24,
+          ),
+        ),
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Text('${article.commentsCount} Comments'),
+              IconButton(
+                  icon: Icon(Icons.launch),
+                  onPressed: () async {
+                    final fakeUrl = 'http://${article.domain}';
+                    if (await canLaunch(fakeUrl)) {
+                      launch(fakeUrl);
+                    }
+                  })
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              'Hello',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await Future.delayed(Duration(seconds: 1));
+          setState(() {
+            _articles.removeAt(0);
+          });
+        },
+        child: ListView(
+          children: _articles.map(_buildItem).toList(),
         ),
       ),
     );
