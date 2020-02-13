@@ -1,206 +1,49 @@
-class Article {
-  final String text;
-  final String url;
-  final String by;
-  final String age;
-  final int score;
-  final int commentsCount;
+import 'dart:convert' as json;
 
-  const Article(
-      {this.text, this.url, this.by, this.age, this.score, this.commentsCount});
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
+import 'serializers.dart';
+
+part 'articles.g.dart';
+
+abstract class Article implements Built<Article, ArticleBuilder> {
+  static Serializer<Article> get serializer => _$articleSerializer;
+  int get id;
+  @nullable
+  bool get deleted;
+  String get type; //"job", "story", "comment", "poll", or "pollopt".
+  String get by;
+  int get time;
+  @nullable
+  String get text;
+  @nullable
+  bool get dead;
+  @nullable
+  int get parent;
+  @nullable
+  int get poll;
+  BuiltList<int> get kids;
+  @nullable
+  String get url;
+  @nullable
+  int get score;
+  @nullable
+  String get title;
+  BuiltList<int> get parts;
+  @nullable
+  int get descendants;
+  Article._();
+  factory Article([void Function(ArticleBuilder) updates]) = _$Article;
 }
 
-final articles = [
-  Article(
-    text: 'How to develop a flutter app',
-    url: 'google.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: 'C++ fondamentals',
-    url: 'wiley.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: 'How to develop a flutter app',
-    url: 'wiley.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: '13 Awesome VS Code extension',
-    url: 'gmail.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: 'Use Codemagic in Flutter app',
-    url: 'wiley.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: 'Build an awesome Brower',
-    url: 'google.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: 'Build an awesome Brower',
-    url: 'google.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: 'How to develop a flutter app',
-    url: 'wiley.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: 'C++ fondamentals',
-    url: 'wiley.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: 'How to develop a flutter app',
-    url: 'wiley.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: '13 Awesome VS Code extension',
-    url: 'gmail.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: 'Use Codemagic in Flutter app',
-    url: 'wiley.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: 'Build an awesome Brower',
-    url: 'google.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: 'Build an awesome Brower',
-    url: 'google.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: 'How to develop a flutter app',
-    url: 'wiley.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: 'C++ fondamentals',
-    url: 'wiley.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: 'How to develop a flutter app',
-    url: 'wiley.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: '13 Awesome VS Code extension',
-    url: 'gmail.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: 'Use Codemagic in Flutter app',
-    url: 'wiley.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: 'Build an awesome Brower',
-    url: 'google.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: 'Build an awesome Brower',
-    url: 'google.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: 'How to develop a flutter app',
-    url: 'wiley.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: 'C++ fondamentals',
-    url: 'wiley.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-  Article(
-    text: 'How to develop a flutter app',
-    url: 'wiley.com',
-    by: 'zdw',
-    age: '3 hours',
-    score: 177,
-    commentsCount: 62,
-  ),
-];
+List<int> parseTopStories(String jsonStr) {
+  return [];
+}
+
+Article parseArticle(String jsonStr) {
+  final parsed = json.jsonDecode(jsonStr);
+  final Article article =
+      standardSerializers.deserializeWith(Article.serializer, parsed);
+  return article;
+}

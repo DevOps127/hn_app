@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'json_parsing.dart';
+part of 'articles.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
@@ -26,8 +26,6 @@ class _$ArticleSerializer implements StructuredSerializer<Article> {
       serializers.serialize(object.by, specifiedType: const FullType(String)),
       'time',
       serializers.serialize(object.time, specifiedType: const FullType(int)),
-      'text',
-      serializers.serialize(object.text, specifiedType: const FullType(String)),
       'kids',
       serializers.serialize(object.kids,
           specifiedType:
@@ -42,6 +40,12 @@ class _$ArticleSerializer implements StructuredSerializer<Article> {
         ..add('deleted')
         ..add(serializers.serialize(object.deleted,
             specifiedType: const FullType(bool)));
+    }
+    if (object.text != null) {
+      result
+        ..add('text')
+        ..add(serializers.serialize(object.text,
+            specifiedType: const FullType(String)));
     }
     if (object.dead != null) {
       result
@@ -233,9 +237,6 @@ class _$Article extends Article {
     }
     if (time == null) {
       throw new BuiltValueNullFieldError('Article', 'time');
-    }
-    if (text == null) {
-      throw new BuiltValueNullFieldError('Article', 'text');
     }
     if (kids == null) {
       throw new BuiltValueNullFieldError('Article', 'kids');

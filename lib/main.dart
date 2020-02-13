@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hn_app/src/articles.dart';
+import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(MyApp());
@@ -27,31 +28,55 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Article> _articles = articles;
+  List<int> _ids = [
+    22317234,
+    22315899,
+    22318165,
+    22307270,
+    22316820,
+    22316491,
+    22318514,
+    22315694,
+    22317371,
+    22317138,
+    22318130,
+  ]; //articles;
+
+  Future<Article> _getArticle(int id) async {
+    final storyUrl = 'https://hacker-news.firebaseio.com/v0/item/$id.json';
+    final storyRes = await http.get(storyUrl);
+    if (storyRes.statusCode == 200) {
+      return parseArticle(storyRes.body);
+    }
+  }
 
   Widget _buildItem(Article article) {
     return Padding(
+      key: Key(article.title),
       padding: const EdgeInsets.all(16),
       child: ExpansionTile(
-        title: Text(
-          article.text,
-          style: TextStyle(
-            fontSize: 24,
+        title: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            article.title ?? '[null]',
+            style: TextStyle(
+              fontSize: 24,
+            ),
           ),
         ),
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              Text('${article.commentsCount} Comments'),
+              Text(article.type),
               IconButton(
-                  icon: Icon(Icons.launch),
-                  onPressed: () async {
-                    final fakeUrl = 'http://${article.url}';
-                    if (await canLaunch(fakeUrl)) {
-                      launch(fakeUrl);
-                    }
-                  })
+                icon: Icon(Icons.launch),
+                onPressed: () async {
+                  if (await canLaunch(article.url)) {
+                    launch(article.url);
+                  }
+                },
+              ),
             ],
           ),
         ],
@@ -65,16 +90,23 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: RefreshIndicator(
-        onRefresh: () async {
-          await Future.delayed(Duration(seconds: 1));
-          setState(() {
-            _articles.removeAt(0);
-          });
-        },
-        child: ListView(
-          children: _articles.map(_buildItem).toList(),
-        ),
+      body: ListView(
+        children: _ids
+            .map(
+              (i) => FutureBuilder(
+                  future: _getArticle(i),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<Article> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return _buildItem(snapshot.data);
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  }),
+            )
+            .toList(),
       ),
     );
   }
