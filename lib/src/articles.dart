@@ -1,24 +1,19 @@
 class Article {
   final String text;
-  final String domain;
+  final String url;
   final String by;
   final String age;
   final int score;
   final int commentsCount;
 
   const Article(
-      {this.text,
-      this.domain,
-      this.by,
-      this.age,
-      this.score,
-      this.commentsCount});
+      {this.text, this.url, this.by, this.age, this.score, this.commentsCount});
 }
 
 final articles = [
   Article(
     text: 'How to develop a flutter app',
-    domain: 'google.com',
+    url: 'google.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -26,7 +21,7 @@ final articles = [
   ),
   Article(
     text: 'C++ fondamentals',
-    domain: 'wiley.com',
+    url: 'wiley.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -34,7 +29,7 @@ final articles = [
   ),
   Article(
     text: 'How to develop a flutter app',
-    domain: 'wiley.com',
+    url: 'wiley.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -42,7 +37,7 @@ final articles = [
   ),
   Article(
     text: '13 Awesome VS Code extension',
-    domain: 'gmail.com',
+    url: 'gmail.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -50,7 +45,7 @@ final articles = [
   ),
   Article(
     text: 'Use Codemagic in Flutter app',
-    domain: 'wiley.com',
+    url: 'wiley.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -58,7 +53,7 @@ final articles = [
   ),
   Article(
     text: 'Build an awesome Brower',
-    domain: 'google.com',
+    url: 'google.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -66,7 +61,7 @@ final articles = [
   ),
   Article(
     text: 'Build an awesome Brower',
-    domain: 'google.com',
+    url: 'google.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -74,7 +69,7 @@ final articles = [
   ),
   Article(
     text: 'How to develop a flutter app',
-    domain: 'wiley.com',
+    url: 'wiley.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -82,7 +77,7 @@ final articles = [
   ),
   Article(
     text: 'C++ fondamentals',
-    domain: 'wiley.com',
+    url: 'wiley.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -90,7 +85,7 @@ final articles = [
   ),
   Article(
     text: 'How to develop a flutter app',
-    domain: 'wiley.com',
+    url: 'wiley.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -98,7 +93,7 @@ final articles = [
   ),
   Article(
     text: '13 Awesome VS Code extension',
-    domain: 'gmail.com',
+    url: 'gmail.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -106,7 +101,7 @@ final articles = [
   ),
   Article(
     text: 'Use Codemagic in Flutter app',
-    domain: 'wiley.com',
+    url: 'wiley.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -114,7 +109,7 @@ final articles = [
   ),
   Article(
     text: 'Build an awesome Brower',
-    domain: 'google.com',
+    url: 'google.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -122,7 +117,7 @@ final articles = [
   ),
   Article(
     text: 'Build an awesome Brower',
-    domain: 'google.com',
+    url: 'google.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -130,7 +125,7 @@ final articles = [
   ),
   Article(
     text: 'How to develop a flutter app',
-    domain: 'wiley.com',
+    url: 'wiley.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -138,7 +133,7 @@ final articles = [
   ),
   Article(
     text: 'C++ fondamentals',
-    domain: 'wiley.com',
+    url: 'wiley.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -146,7 +141,7 @@ final articles = [
   ),
   Article(
     text: 'How to develop a flutter app',
-    domain: 'wiley.com',
+    url: 'wiley.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -154,7 +149,7 @@ final articles = [
   ),
   Article(
     text: '13 Awesome VS Code extension',
-    domain: 'gmail.com',
+    url: 'gmail.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -162,7 +157,7 @@ final articles = [
   ),
   Article(
     text: 'Use Codemagic in Flutter app',
-    domain: 'wiley.com',
+    url: 'wiley.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -170,7 +165,7 @@ final articles = [
   ),
   Article(
     text: 'Build an awesome Brower',
-    domain: 'google.com',
+    url: 'google.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -178,7 +173,7 @@ final articles = [
   ),
   Article(
     text: 'Build an awesome Brower',
-    domain: 'google.com',
+    url: 'google.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -186,7 +181,7 @@ final articles = [
   ),
   Article(
     text: 'How to develop a flutter app',
-    domain: 'wiley.com',
+    url: 'wiley.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -194,7 +189,7 @@ final articles = [
   ),
   Article(
     text: 'C++ fondamentals',
-    domain: 'wiley.com',
+    url: 'wiley.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
@@ -202,7 +197,7 @@ final articles = [
   ),
   Article(
     text: 'How to develop a flutter app',
-    domain: 'wiley.com',
+    url: 'wiley.com',
     by: 'zdw',
     age: '3 hours',
     score: 177,
