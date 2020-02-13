@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hn_app/json_parsing.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   test('parse topStories.json', () {
@@ -13,7 +15,6 @@ void main() {
     22316379,
 ]
     """;
-
     expect(parseTopStories(jsonString).first, 22307270);
   });
 
@@ -63,7 +64,25 @@ void main() {
     "type": "story",
     "url": "http://www.getdropbox.com/u/2/screencast.html"
 }""";
-
     expect(parseArticle(jsonString).by, "dhouston");
   });
+
+  test(
+    "parse item.json over a network",
+    () async {
+      final url = "https://hacker-news.firebaseio.com/v0/beststories.json";
+      final res = await http.get(url);
+      if (res.statusCode == 200) {
+        final idList = json.decode(res.body);
+        if (idList.isNotEmpty) {
+          final storyUrl =
+              ' https://hacker-news.firebaseio.com/v0/item/${idList.first}.json';
+          final storyRes = await http.get(storyUrl);
+          if (res.statusCode == 200) {
+            expect(parseArticle(storyRes.body).by, "dhouston");
+          }
+        }
+      }
+    },
+  );
 }
