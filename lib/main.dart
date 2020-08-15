@@ -86,6 +86,21 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: 0,
+          onTap: (index) {
+            if (index == 0) {
+              widget.bloc.storiesType.add(StoriesType.topStories);
+            } else {
+              widget.bloc.storiesType.add(StoriesType.newStories);
+            }
+          },
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.arrow_drop_up), title: Text('Top Stories')),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.new_releases), title: Text('New Stories')),
+          ]),
       body: StreamBuilder<UnmodifiableListView<Article>>(
         stream: widget.bloc.articles,
         initialData: UnmodifiableListView<Article>([]),
